@@ -1,0 +1,13 @@
+# include<stdio.h>
+void main(){
+	char str[100];
+	int i,c=1;
+	printf("enter the any sentences:");
+	gets(str);
+	for (i=0;i<strlen(str);i++){
+		
+		if(str[i]==' '&& str[i+1]!=' ')
+		c++;
+	}
+printf("%d sentence:",c);	
+}
