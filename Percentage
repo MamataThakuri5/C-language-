@@ -1,0 +1,59 @@
+#include <stdio.h>
+#include <string.h>
+float percent(int marks[], int n) {
+    float sum = 0;
+    for (int i = 0; i < n; i++) {
+        sum += marks[i];
+    }
+    return (sum / 500) * 100;
+}
+
+void swap_float(float *a, float *b) {
+    float temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+void swap_string(char a[], char b[]) {
+    char temp[50];
+    strcpy(temp, a);
+    strcpy(a, b);
+    strcpy(b, temp);
+}
+
+int main() {
+    char names[5][50];
+    int marks[5][5];
+    float score[5];
+    int i, j;
+    printf("Enter names and marks for 5 students:\n");
+    for (i = 0; i < 5; i++) {
+        printf("\nEnter name of student %d: ", i + 1);
+        scanf(" %[^\n]", names[i]);  // Read name with spaces
+
+        printf("Enter 5 subject marks (out of 100): ");
+        for (j = 0; j < 5; j++) {
+            scanf("%d", &marks[i][j]);
+        }
+        score[i] = percent(marks[i], 5);
+    }
+    printf("\nOriginal Data:\n");
+    for (i = 0; i < 5; i++) {
+        printf("%s scored %.2f%%\n", names[i], score[i]);
+    }
+
+    for (i = 0; i < 4; i++) {
+        for (j = 0; j < 4 - i; j++) {
+            if (score[j] < score[j + 1]) {
+                swap_float(&score[j], &score[j + 1]);
+                swap_string(names[j], names[j + 1]);
+            }
+        }
+    }
+    printf("\nSorted Data (Descending Order by Percentage):\n");
+    for (i = 0; i < 5; i++) {
+        printf("%s scored %.2f%%\n", names[i], score[i]);
+    }
+
+    return 0;
+}
